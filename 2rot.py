@@ -39,8 +39,6 @@ values = {
 	6: 0
 }
 
-RST=0
-
 target = liblo.Address(9001)
 target2 = liblo.Address(9000)
 
@@ -76,20 +74,9 @@ def update_display(enc_number):
 	global values
 	global fifo_out
 
-#	if (enc_number == 3):
-#		values[enc_number] = values[enc_number] * -1
-
-#	if (enc_number == 4):
-#		values[enc_number] = values[enc_number] * -1
-
-#	if (enc_number == 6):
-#		values[enc_number] = values[enc_number] * -1
-
 	liblo.send( target, "/enc/" + str(enc_number), values[enc_number] )
 #	liblo.send( target2, "/enc/" + str(enc_number), values[enc_number] )
 	print("/enc/" + str(enc_number) + ":" + str(values[enc_number]))
-	#fifo_out.write( "/enc/" + str(enc_number) + ":" + str(values[enc_number]) + "\n" )
-	#fifo_out.flush()
 
 rot1 = RotaryEncoder(PIN_A,PIN_B, 0,rot_event_1)
 rot2 = RotaryEncoder(PIN_C,PIN_D, 0,rot_event_2)
@@ -100,6 +87,6 @@ rot6 = RotaryEncoder(PIN_K,PIN_L, 0,rot_event_6)
 
 while True:
 	# do stuff
-	#time.sleep(0.0025)
-	pass
+	time.sleep(0.025)
+	#pass
 	

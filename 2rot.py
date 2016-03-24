@@ -73,10 +73,12 @@ def update_display(enc_number):
 	global client
 	global values
 	global fifo_out
-
+	
+	# display.py
 	liblo.send( target, "/enc/" + str(enc_number), values[enc_number] )
-#	liblo.send( target2, "/enc/" + str(enc_number), values[enc_number] )
-	print("/enc/" + str(enc_number) + ":" + str(values[enc_number]))
+	# pd patch
+	liblo.send( target2, "/enc/" + str(enc_number), values[enc_number] )
+	#print("/enc/" + str(enc_number) + ":" + str(values[enc_number]))
 
 rot1 = RotaryEncoder(PIN_A,PIN_B, 0,rot_event_1)
 rot2 = RotaryEncoder(PIN_C,PIN_D, 0,rot_event_2)

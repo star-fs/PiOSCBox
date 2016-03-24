@@ -84,11 +84,11 @@ while True:
 		glcd.draw_rectangle(0, 0, 128, 64)
 		glcd.draw_string(str(values["enc1"] * -1), wendy_font, 5, 5,spacing=0)
 		glcd.draw_string(str(values["enc2"] * -1), wendy_font, 55, 5,spacing=0)
-		glcd.draw_string(str(values["enc3"] * -1), wendy_font, 105, 5,spacing=0)
+		glcd.draw_string(str(values["enc3"]), wendy_font, 105, 5,spacing=0)
 
 		glcd.draw_string("ip:" + ip_addr, wendy_font, 5, 30,spacing=0)
 
-		glcd.draw_string(str(values["enc4"]), wendy_font, 5, 50,spacing=0)
+		glcd.draw_string(str(values["enc4"] * -1), wendy_font, 5, 50,spacing=0)
 		glcd.draw_string(str(values["enc5"] * -1), wendy_font, 55, 50,spacing=0)
 		glcd.draw_string(str(values["enc6"]), wendy_font, 105, 50,spacing=0)
 

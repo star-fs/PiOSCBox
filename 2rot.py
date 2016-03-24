@@ -18,16 +18,16 @@ PIN_B = 12
 PIN_C = 22
 PIN_D = 23
 
-PIN_E = 18
+PIN_E = 26
 PIN_F = 17
 
-PIN_G = 9
-PIN_H = 7
+PIN_G = 13
+PIN_H = 19
 
 PIN_I = 27
 PIN_J = 15
 
-PIN_K = 4 
+PIN_K = 18
 PIN_L = 14
 
 values = {

@@ -21,7 +21,9 @@ class RotaryEncoder:
 	rotary_b = 0 
 	rotary_c = 0 
 	last_state = 0 
+	last_delta = 0
 	direction = 0 
+	stack = list()
 
 	# Initialise rotary encoder object
 	def __init__(self,pinA,pinB,button,callback):
@@ -55,34 +57,67 @@ class RotaryEncoder:
 
 	# Call back routine called by switch events
 	def switch_event(self,switch):
-		if GPIO.input(self.pinA):
-			self.rotary_a = 1 
-		else:
-			self.rotary_a = 0 
-		
-		if GPIO.input(self.pinB):
-			self.rotary_b = 1 
-		else:
-			self.rotary_b = 0
 
-		self.rotary_c = self.rotary_a ^ self.rotary_b
-		new_state = self.rotary_a * 4 + self.rotary_b * 2 + self.rotary_c * 1 
-		delta = (new_state - self.last_state) % 4 
-		self.last_state = new_state
-		event = 0 
+		totals = {1:0, 2:0, 3:0}
+		event = 0
+		self.rotary_a = GPIO.input(self.pinA)
+		self.rotary_b = GPIO.input(self.pinB)
+		new_state = (self.rotary_a ^ self.rotary_b) |self.rotary_b << 1
 
-		if delta == 1:
-			if self.direction == self.CLOCKWISE:
-				# print "Clockwise"
-				event = self.direction
-			else:
+		if new_state != self.last_state:
+			delta = (new_state -self.last_state) % 4
+
+			print "delta:" + str(delta)
+
+			self.stack.append(delta)
+			if len(self.stack) > 10:
+				self.stack.pop(0)
+
+			for i in self.stack:
+				totals[i] += 1
+				
+			if delta == 1 and totals[delta] > 4:
+				print "clockwise"
 				self.direction = self.CLOCKWISE
-		elif delta == 3:
-			if self.direction == self.ANTICLOCKWISE:
-				# print "Anticlockwise"
 				event = self.direction
-			else:
+
+			elif delta == 3 and totals[delta] > 4:
+				print "anticlockwise"
 				self.direction = self.ANTICLOCKWISE
+				event = self.direction
+
+			elif delta == 2:
+
+				if self.direction == self.CLOCKWISE:
+					print "clockwise"
+				else: 
+					print "anticlockwise"
+				# we don't append 2's to the stack
+				event = self.direction
+
+			self.last_state = new_state
+
+#		self.rotary_c = self.rotary_a ^ self.rotary_b
+#		new_state = self.rotary_a * 4 + self.rotary_b * 2 + self.rotary_c * 1 
+#		delta = (new_state - self.last_state) % 4 
+#		self.last_state = new_state
+#		event = 0 
+
+#		print "new_state:" + str(new_state)
+#		print "delta:" + str(delta)
+
+#		if delta == 1:
+#			if self.direction == self.CLOCKWISE:
+#				# print "Clockwise"
+#				event = self.direction
+#			else:
+#				self.direction = self.CLOCKWISE
+#		elif delta == 3:
+#			if self.direction == self.ANTICLOCKWISE:
+#				# print "Anticlockwise"
+#				event = self.direction
+#			else:
+#				self.direction = self.ANTICLOCKWISE
 
 		if event > 0:
 			self.callback(event)
@@ -95,7 +130,7 @@ class RotaryEncoder:
 		else:
 			event = self.BUTTONDOWN
 			self.callback(event)
-			return
+			#return
 
 	# Get a switch state
 	def getSwitchState(self, switch):

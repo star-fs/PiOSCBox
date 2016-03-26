@@ -10,7 +10,7 @@ wendy_font = font.XglcdFont('fonts/ArcadePix9x11.c', 9, 11)
 
 glcd = st7565.Glcd(rgb=[21,20,16])
 glcd.init()
-#glcd.set_backlight_color(0, 100, 0)
+glcd.set_backlight_color(100, 100, 20)
 
 
 from netifaces import interfaces, ifaddresses, AF_INET

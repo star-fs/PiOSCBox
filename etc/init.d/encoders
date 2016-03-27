@@ -1,0 +1,37 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          encoders
+# Required-Start:
+# Required-Stop:     encoders
+# Should-Stop:       
+# X-Start-Before:    encoders
+# Default-Start:     S
+# Default-Stop:      0 1 6
+# Short-Description:
+# Description:       
+### END INIT INFO
+
+set -e
+
+# Include core init functions if needed
+#. /lib/lsb/init-functions
+
+case "${1:-}" in
+  stop|reload|restart|force-reload)
+        echo "Stopping RotaryEncoder Control."
+	kill `cat /var/run/encoders.pid`
+        ;;
+
+  start)
+        echo "Starting RotaryEncoder Control. "
+	cd /root/PiOSCBox/encoder_lib
+        /root/PiOSCBox/encoder_lib/encoderInterface &
+	echo $! > /var/run/encoders.pid 
+	;;
+
+  *)
+        echo "Usage: ${0:-} {start|stop|status|restart|reload|force-reload}" >&2
+        exit 1
+        ;;
+esac

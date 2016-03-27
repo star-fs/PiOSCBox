@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004 Steve Harris, Uwe Koloska
+ *  Copyright (C) 2016 Star Morin
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU Lesser General Public License as
@@ -86,7 +86,6 @@ int main(int argc, char *argv[])
     volatile long last_enc_5 = 0;
     volatile long last_enc_6 = 0;
 
-
     struct encoder *encoder1 = setupencoder(pin_a, pin_b);
     struct encoder *encoder2 = setupencoder(pin_c, pin_d);
     struct encoder *encoder3 = setupencoder(pin_e, pin_f);
@@ -97,7 +96,6 @@ int main(int argc, char *argv[])
 	while (1) {
 		delay(10);
 		if (encoder1->value != last_enc_1) {
-			printf("enc 1: %d\n", encoder1->value);
 			last_enc_1 = encoder1->value;
 			if (lo_send(t, "/enc/1", "i", last_enc_1) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
@@ -107,7 +105,6 @@ int main(int argc, char *argv[])
 			}
 		}
 		if (encoder2->value != last_enc_2) {
-			printf("enc 2: %d\n", encoder2->value);
 			last_enc_2 = encoder2->value;
 			if (lo_send(t, "/enc/2", "i", last_enc_2) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
@@ -117,7 +114,6 @@ int main(int argc, char *argv[])
 			}
 		}
 		if (encoder3->value != last_enc_3) {
-			printf("enc 3: %d\n", encoder3->value);
 			last_enc_3 = encoder3->value;
 			if (lo_send(t, "/enc/3", "i", last_enc_3) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
@@ -127,7 +123,6 @@ int main(int argc, char *argv[])
 			}
 		}
 		if (encoder4->value != last_enc_4) {
-			printf("enc 4: %d\n", encoder4->value);
 			last_enc_4 = encoder4->value;
 			if (lo_send(t, "/enc/4", "i", last_enc_4) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
@@ -137,7 +132,6 @@ int main(int argc, char *argv[])
 			}
 		}
 		if (encoder5->value != last_enc_5) {
-			printf("enc 5: %d\n", encoder5->value);
 			last_enc_5 = encoder5->value;
 			if (lo_send(t, "/enc/5", "i", last_enc_5) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
@@ -147,7 +141,6 @@ int main(int argc, char *argv[])
 			}
 		}
 		if (encoder6->value != last_enc_6) {
-			printf("enc 6: %d\n", encoder6->value);
 			last_enc_6 = encoder6->value;
 			if (lo_send(t, "/enc/6", "i", last_enc_6) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));

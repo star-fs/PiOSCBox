@@ -62,24 +62,15 @@ server.add_method( "/enc/4", "i", update_display)
 server.add_method( "/enc/5", "i", update_display)
 server.add_method( "/enc/6", "i", update_display)
 
-# handle all pending requests then return
 while True:
-	global_count = global_count + 1
+
+	global_count += 1
+
 	server.recv(100)
 
-#       if (enc_number == 1):
-#               values[enc_number] = values[enc_number] * -1
-
-#       if (enc_number == 3):
-#               values[enc_number] = values[enc_number] * -1
-
-#       if (enc_number == 5):
-#               values[enc_number] = values[enc_number] * -1
-
-	#glcd.set_backlight_color(10, 100, 50)
-	
 	# update display
-	if (global_count - 2 > 1):
+	if (global_count - 3 > 1):
+
 		glcd.clear_back_buffer()
 		glcd.draw_rectangle(0, 0, 128, 64)
 		glcd.draw_string(str(values["enc1"] * -1), wendy_font, 5, 5,spacing=0)

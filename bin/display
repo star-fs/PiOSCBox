@@ -2,10 +2,13 @@
 
 import time
 import liblo
+import sys
+
+sys.path.append("../lib/python/st7562/")
 
 import st7565
 import xglcd_font as font
-wendy_font = font.XglcdFont('fonts/ArcadePix9x11.c', 9, 11)
+wendy_font = font.XglcdFont('../lib/python/st7562/fonts/ArcadePix9x11.c', 9, 11)
 #wendy_font = font.XglcdFont('fonts/Wendy7x8.c', 7, 8)
 
 glcd = st7565.Glcd(rgb=[21,20,16])

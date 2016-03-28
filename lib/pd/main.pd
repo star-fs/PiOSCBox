@@ -1,4 +1,4 @@
-#N canvas 421 247 663 638 10;
+#N canvas 596 161 663 638 10;
 #X obj 277 521 sendOSC;
 #X msg 201 487 send \$1 \$2;
 #X floatatom 277 547 5 0 0 0 - - -;
@@ -21,7 +21,7 @@
 #X obj 588 63 delay 20;
 #X obj 448 110 osc~;
 #X obj 448 85 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
--262144 -1 -1 0 256;
+-262144 -1 -1 212 256;
 #X msg 587 85 0 500;
 #X obj 483 134 *~ 0.5;
 #X obj 544 138 nbx 5 14 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
@@ -50,7 +50,6 @@
 -1;
 #X obj 307 68 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 103 41 print unrouted_osc;
 #X connect 0 0 2 0;
 #X connect 0 1 3 0;
 #X connect 1 0 0 0;
@@ -105,4 +104,3 @@
 #X connect 34 5 41 0;
 #X connect 34 6 29 0;
 #X connect 35 0 33 0;
-#X connect 35 0 42 0;

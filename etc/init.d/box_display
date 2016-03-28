@@ -25,7 +25,7 @@ case "${1:-}" in
 
   start)
         echo "Starting box_display... "
-	cd /root/PiOSCBox/
+	cd /root/PiOSCBox/bin/
         /root/PiOSCBox/bin/display &
 	echo $! > /var/run/box_display.pid 
 	;;

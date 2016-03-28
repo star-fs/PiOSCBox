@@ -1,4 +1,5 @@
-//17 pins / 2 pins per encoder = 8 maximum encoders
+// https://github.com/astine/rotaryencoder.git
+// 17 pins / 2 pins per encoder = 8 maximum encoders
 #define max_encoders 8
 
 struct encoder
@@ -9,8 +10,8 @@ struct encoder
     volatile int lastEncoded;
 };
 
-//Pre-allocate encoder objects on the stack so we don't have to 
-//worry about freeing them
+// Pre-allocate encoder objects on the stack so we don't have to 
+// worry about freeing them
 struct encoder encoders[max_encoders];
 
 /*

@@ -1,4 +1,6 @@
-//rotaryencoder.c
+// https://github.com/astine/rotaryencoder.git
+// rotaryencoder.c
+
 #include <wiringPi.h>
 
 #include <stdio.h>

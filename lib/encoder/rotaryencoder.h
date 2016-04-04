@@ -7,6 +7,7 @@ struct encoder
     int pin_a;
     int pin_b;
     volatile long value;
+    volatile long real_value;
     volatile int lastEncoded;
 };
 

@@ -22,8 +22,23 @@ void updateEncoders()
         int encoded = (MSB << 1) | LSB;
         int sum = (encoder->lastEncoded << 2) | encoded;
 
-        if(sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) encoder->value++;
-        if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) encoder->value--;
+        if (sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) {
+
+		encoder->real_value++;
+		if (encoder->real_value % 2 == 0) {
+			encoder->value++;
+		}
+
+	}
+
+        if (sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) {
+
+		encoder->real_value--;	
+		if (encoder->real_value % 2 == 0) {
+			encoder->value--;
+		}	
+
+	} 
 
         encoder->lastEncoded = encoded;
     }
@@ -40,6 +55,7 @@ struct encoder *setupencoder(int pin_a, int pin_b)
     struct encoder *newencoder = encoders + numberofencoders++;
     newencoder->pin_a = pin_a;
     newencoder->pin_b = pin_b;
+    newencoder->real_value = 0;
     newencoder->value = 0;
     newencoder->lastEncoded = 0;
 

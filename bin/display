@@ -8,7 +8,10 @@ sys.path.append("../lib/python/st7562/")
 
 import st7565
 import xglcd_font as font
-wendy_font = font.XglcdFont('../lib/python/st7562/fonts/ArcadePix9x11.c', 9, 11)
+#wendy_font = font.XglcdFont('../lib/python/st7562/fonts/Neato5x7.c', 5, 7)
+#wendy_font = font.XglcdFont('../lib/python/st7562/fonts/ArcadePix9x11.c', 9, 11)
+#wendy_font = font.XglcdFont('../lib/python/st7562/fonts/Robotron7x11.c', 7, 11)
+wendy_font = font.XglcdFont('../lib/python/st7562/fonts/Bally7x9.c', 7, 9)
 #wendy_font = font.XglcdFont('fonts/Wendy7x8.c', 7, 8)
 
 glcd = st7565.Glcd(rgb=[21,20,16])
@@ -34,15 +37,24 @@ width = 128
 height = 64
 
 values = {
-	"enc1": 0,
-	"enc2": 0,
-	"enc3": 0,
-	"enc4": 0,
-	"enc5": 0,
-	"enc6": 0
+	"/enc/1/value": 0,
+	"/enc/1/label": "ctrl-1",
+	"/enc/2/value": 0,
+	"/enc/2/label": "ctrl-2",
+	"/enc/3/value": 0,
+	"/enc/3/label": "ctrl-3",
+	"/enc/4/value": 0,
+	"/enc/4/label": "ctrl-4",
+	"/enc/5/value": 0,
+	"/enc/5/label": "ctrl-5",
+	"/enc/6/value": 0,
+	"/enc/6/label": "ctrl-6",
+	"patch_name": "default",
+	#"enc6": {"value": 0,"name": "ctrl 6"},
 }
 
 def update_display(path, args, types, source):
+
 	global glcd
 	global wendy_font
 
@@ -51,19 +63,26 @@ def update_display(path, args, types, source):
 
 	global global_count
 
-	var_name = path.replace("/","")
-	values[var_name] = int(args[0])
-	foo_test(path, args, types, source)
+	if types[0] == "i":
+		values[path] = int(args[0])
 
-def foo_test(path, args, types, source):
-	var_name = path.replace("/","")
-	
-server.add_method( "/enc/1", "i", update_display)
-server.add_method( "/enc/2", "i", update_display)
-server.add_method( "/enc/3", "i", update_display)
-server.add_method( "/enc/4", "i", update_display)
-server.add_method( "/enc/5", "i", update_display)
-server.add_method( "/enc/6", "i", update_display)
+	elif types[0] == "s":
+		values[path] = str(args[0])
+		
+# main
+
+server.add_method( "/enc/1/value", "i", update_display)
+server.add_method( "/enc/1/label", "s", update_display)
+server.add_method( "/enc/2/value", "i", update_display)
+server.add_method( "/enc/2/label", "s", update_display)
+server.add_method( "/enc/3/value", "i", update_display)
+server.add_method( "/enc/3/label", "s", update_display)
+server.add_method( "/enc/4/value", "i", update_display)
+server.add_method( "/enc/4/label", "s", update_display)
+server.add_method( "/enc/5/value", "i", update_display)
+server.add_method( "/enc/5/label", "s", update_display)
+server.add_method( "/enc/6/value", "i", update_display)
+server.add_method( "/enc/6/label", "s", update_display)
 
 while True:
 
@@ -76,15 +95,29 @@ while True:
 
 		glcd.clear_back_buffer()
 		glcd.draw_rectangle(0, 0, 128, 64)
-		glcd.draw_string(str(values["enc1"] * -1), wendy_font, 5, 5,spacing=0)
-		glcd.draw_string(str(values["enc2"] * -1), wendy_font, 55, 5,spacing=0)
-		glcd.draw_string(str(values["enc3"]), wendy_font, 95, 5,spacing=0)
 
-		glcd.draw_string("ip:" + ip_addr, wendy_font, 15, 27,spacing=0)
+		# row 1 lables
+		glcd.draw_string(str(values["/enc/1/label"] * -1), wendy_font, 5, 5,spacing=0)
+		glcd.draw_string(str(values["/enc/2/label"] * -1), wendy_font, 55, 5,spacing=0)
+		glcd.draw_string(str(values["/enc/3/label"]), wendy_font, 95, 5,spacing=0)
 
-		glcd.draw_string(str(values["enc4"] * -1), wendy_font, 5, 50,spacing=0)
-		glcd.draw_string(str(values["enc5"] * -1), wendy_font, 55, 50,spacing=0)
-		glcd.draw_string(str(values["enc6"]), wendy_font, 95, 50,spacing=0)
+		# row 1 values
+		glcd.draw_string(str(values["/enc/1/value"] * -1), wendy_font, 5, 5,spacing=0)
+		glcd.draw_string(str(values["/enc/2/value"] * -1), wendy_font, 55, 5,spacing=0)
+		glcd.draw_string(str(values["/enc/3/value"]), wendy_font, 95, 5,spacing=0)
+
+		# row 2 lables
+		glcd.draw_string(str(values["/enc/4/label"] * -1), wendy_font, 5, 5,spacing=0)
+		glcd.draw_string(str(values["/enc/5/label"] * -1), wendy_font, 55, 5,spacing=0)
+		glcd.draw_string(str(values["/enc/6/label"]), wendy_font, 95, 5,spacing=0)
+
+		# row 2 values
+		glcd.draw_string(str(values["/enc/4/value"] * -1), wendy_font, 5, 50,spacing=0)
+		glcd.draw_string(str(values["/enc/5/value"] * -1), wendy_font, 55, 50,spacing=0)
+		glcd.draw_string(str(values["/enc/6/value"]), wendy_font, 95, 50,spacing=0)
+
+		# general info
+		glcd.draw_string("ip:" + ip_addr + "  patch:" + values["patch_name"], wendy_font, 15, 27,spacing=0)
 
 		glcd.flip()
 		#disp.display()

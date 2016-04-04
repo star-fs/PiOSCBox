@@ -97,55 +97,55 @@ int main(int argc, char *argv[])
 		delay(10);
 		if (encoder1->value != last_enc_1) {
 			last_enc_1 = encoder1->value;
-			if (lo_send(t, "/enc/1", "i", last_enc_1) == -1) {
+			if (lo_send(t, "/enc/1/value", "i", last_enc_1) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/1", "i", last_enc_1) == -1) {
+			if (lo_send(t2, "/enc/1/value", "i", last_enc_1) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}
 		if (encoder2->value != last_enc_2) {
 			last_enc_2 = encoder2->value;
-			if (lo_send(t, "/enc/2", "i", last_enc_2) == -1) {
+			if (lo_send(t, "/enc/2/value", "i", last_enc_2) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/2", "i", last_enc_2) == -1) {
+			if (lo_send(t2, "/enc/2/value", "i", last_enc_2) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}
 		if (encoder3->value != last_enc_3) {
 			last_enc_3 = encoder3->value;
-			if (lo_send(t, "/enc/3", "i", last_enc_3) == -1) {
+			if (lo_send(t, "/enc/3/value", "i", last_enc_3) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/3", "i", last_enc_3) == -1) {
+			if (lo_send(t2, "/enc/3/value", "i", last_enc_3) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}
 		if (encoder4->value != last_enc_4) {
 			last_enc_4 = encoder4->value;
-			if (lo_send(t, "/enc/4", "i", last_enc_4) == -1) {
+			if (lo_send(t, "/enc/4/value", "i", last_enc_4) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/4", "i", last_enc_4) == -1) {
+			if (lo_send(t2, "/enc/4/value", "i", last_enc_4) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}
 		if (encoder5->value != last_enc_5) {
 			last_enc_5 = encoder5->value;
-			if (lo_send(t, "/enc/5", "i", last_enc_5) == -1) {
+			if (lo_send(t, "/enc/5/value", "i", last_enc_5) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/5", "i", last_enc_5) == -1) {
+			if (lo_send(t2, "/enc/5/value", "i", last_enc_5) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}
 		if (encoder6->value != last_enc_6) {
 			last_enc_6 = encoder6->value;
-			if (lo_send(t, "/enc/6", "i", last_enc_6) == -1) {
+			if (lo_send(t, "/enc/6/value", "i", last_enc_6) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/6", "i", last_enc_6) == -1) {
+			if (lo_send(t2, "/enc/6/value", "i", last_enc_6) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}

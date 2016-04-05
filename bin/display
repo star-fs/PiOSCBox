@@ -7,12 +7,15 @@ import sys
 sys.path.append("../lib/python/st7562/")
 
 import st7565
+
 import xglcd_font as font
-#wendy_font = font.XglcdFont('../lib/python/st7562/fonts/Neato5x7.c', 5, 7)
+fixed = font.XglcdFont('../lib/python/st7562/fonts/Wendy7x8.c', 7, 8)
+neato = font.XglcdFont('../lib/python/st7562/fonts/FixedFont5x8.c', 5, 8)
+
+#neato = font.XglcdFont('../lib/python/st7562/fonts/Neato5x7.c', 5, 7)
 #wendy_font = font.XglcdFont('../lib/python/st7562/fonts/ArcadePix9x11.c', 9, 11)
 #wendy_font = font.XglcdFont('../lib/python/st7562/fonts/Robotron7x11.c', 7, 11)
-wendy_font = font.XglcdFont('../lib/python/st7562/fonts/Bally7x9.c', 7, 9)
-#wendy_font = font.XglcdFont('fonts/Wendy7x8.c', 7, 8)
+#wendy_font = font.XglcdFont('../lib/python/st7562/fonts/Bally7x9.c', 7, 9)
 
 glcd = st7565.Glcd(rgb=[21,20,16])
 glcd.init()
@@ -22,7 +25,7 @@ from netifaces import interfaces, ifaddresses, AF_INET
 
 #ifaceName = 'eth0'
 ifaceName = 'wlan0'
-ip_addrs  = ifaddresses(ifaceName).setdefault(AF_INET, [{'addr':'No IP addr'}] )
+ip_addrs  = ifaddresses(ifaceName).setdefault(AF_INET, [{'addr':'no ip'}] )
 
 ip_addr = ip_addrs[0]['addr']
 
@@ -37,7 +40,7 @@ height = 64
 
 values = {
 	"/enc/1/value": 0,
-	"/enc/1/label": "ctr1",
+	"/enc/1/label": "PatSel",
 	"/enc/2/value": 0,
 	"/enc/2/label": "ctr2",
 	"/enc/3/value": 0,
@@ -48,7 +51,7 @@ values = {
 	"/enc/5/label": "ctl5",
 	"/enc/6/value": 0,
 	"/enc/6/label": "ctl6",
-	"patch_name": "default",
+	"/patch_name": "default",
 	#"enc6": {"value": 0,"name": "ctrl 6"},
 }
 
@@ -96,27 +99,27 @@ while True:
 		glcd.draw_rectangle(0, 0, 128, 64)
 
 		# row 1 lables
-		glcd.draw_string(str(values["/enc/1/label"]), wendy_font, 5, 3,spacing=0)
-		glcd.draw_string(str(values["/enc/2/label"]), wendy_font, 55, 3,spacing=0)
-		glcd.draw_string(str(values["/enc/3/label"]), wendy_font, 95, 3,spacing=0)
+		glcd.draw_string(str(values["/enc/1/label"]), fixed, 5, 3,spacing=0)
+		glcd.draw_string(str(values["/enc/2/label"]), fixed, 55, 3,spacing=0)
+		glcd.draw_string(str(values["/enc/3/label"]), fixed, 95, 3,spacing=0)
 
 		# row 1 values
-		glcd.draw_string(str(values["/enc/1/value"] * -1), wendy_font, 5, 14,spacing=0)
-		glcd.draw_string(str(values["/enc/2/value"] * -1), wendy_font, 55, 14,spacing=0)
-		glcd.draw_string(str(values["/enc/3/value"]), wendy_font, 95, 14,spacing=0)
+		glcd.draw_string(str(values["/enc/1/value"]), neato, 5, 14,spacing=0)
+		glcd.draw_string(str(values["/enc/2/value"]), neato, 55, 14,spacing=0)
+		glcd.draw_string(str(values["/enc/3/value"]), neato, 95, 14,spacing=0)
 
 		# row 2 lables
-		glcd.draw_string(str(values["/enc/4/label"]), wendy_font, 5, 26,spacing=0)
-		glcd.draw_string(str(values["/enc/5/label"]), wendy_font, 55, 26,spacing=0)
-		glcd.draw_string(str(values["/enc/6/label"]), wendy_font, 95, 26,spacing=0)
+		glcd.draw_string(str(values["/enc/4/label"]), fixed, 5, 26,spacing=0)
+		glcd.draw_string(str(values["/enc/5/label"]), fixed, 55, 26,spacing=0)
+		glcd.draw_string(str(values["/enc/6/label"]), fixed, 95, 26,spacing=0)
 
 		# row 2 values
-		glcd.draw_string(str(values["/enc/4/value"] * -1), wendy_font, 5, 38,spacing=0)
-		glcd.draw_string(str(values["/enc/5/value"] * -1), wendy_font, 55, 38,spacing=0)
-		glcd.draw_string(str(values["/enc/6/value"]), wendy_font, 95, 38,spacing=0)
+		glcd.draw_string(str(values["/enc/4/value"]), neato, 5, 38,spacing=0)
+		glcd.draw_string(str(values["/enc/5/value"]), neato, 55, 38,spacing=0)
+		glcd.draw_string(str(values["/enc/6/value"]), neato, 95, 38,spacing=0)
 
 		# general info
-		glcd.draw_string("" + ip_addr + ":" + values["patch_name"], wendy_font, 10, 50,spacing=0)
+		glcd.draw_string("" + ip_addr + ":" + values["/patch_name"], fixed, 10, 50,spacing=0)
 
 		glcd.flip()
 		#disp.display()

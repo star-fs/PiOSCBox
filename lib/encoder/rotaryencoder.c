@@ -36,8 +36,8 @@ void updateEncoders()
 		encoder->real_value--;	
 		if (encoder->real_value % 2 == 0) {
 			encoder->value--;
-		}	
-
+		}
+	
 	} 
 
         encoder->lastEncoded = encoded;

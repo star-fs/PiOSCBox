@@ -59,7 +59,6 @@ int main(int argc, char *argv[])
     wiringPiSetup();
 
     lo_address t = lo_address_new(NULL, "9000");
-    lo_address t2 = lo_address_new(NULL, "9001");
 
     int pin_a = 22;
     int pin_b = 26;
@@ -100,16 +99,10 @@ int main(int argc, char *argv[])
 			if (lo_send(t, "/enc/1/value", "i", last_enc_1) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/1/value", "i", last_enc_1) == -1) {
-				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
-			}
 		}
 		if (encoder2->value != last_enc_2) {
 			last_enc_2 = encoder2->value;
 			if (lo_send(t, "/enc/2/value", "i", last_enc_2) == -1) {
-				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
-			}
-			if (lo_send(t2, "/enc/2/value", "i", last_enc_2) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}
@@ -118,16 +111,10 @@ int main(int argc, char *argv[])
 			if (lo_send(t, "/enc/3/value", "i", last_enc_3) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/3/value", "i", last_enc_3) == -1) {
-				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
-			}
 		}
 		if (encoder4->value != last_enc_4) {
 			last_enc_4 = encoder4->value;
 			if (lo_send(t, "/enc/4/value", "i", last_enc_4) == -1) {
-				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
-			}
-			if (lo_send(t2, "/enc/4/value", "i", last_enc_4) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}
@@ -136,16 +123,10 @@ int main(int argc, char *argv[])
 			if (lo_send(t, "/enc/5/value", "i", last_enc_5) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
-			if (lo_send(t2, "/enc/5/value", "i", last_enc_5) == -1) {
-				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
-			}
 		}
 		if (encoder6->value != last_enc_6) {
 			last_enc_6 = encoder6->value;
 			if (lo_send(t, "/enc/6/value", "i", last_enc_6) == -1) {
-				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
-			}
-			if (lo_send(t2, "/enc/6/value", "i", last_enc_6) == -1) {
 				printf("OSC error %d: %s\n", lo_address_errno(t), lo_address_errstr(t));
 			}
 		}

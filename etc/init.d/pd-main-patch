@@ -19,16 +19,15 @@ set -e
 
 case "${1:-}" in
   stop|reload|restart|force-reload)
-        echo "Stopping box_display."
-	kill `cat /var/run/box_display.pid`
+        echo "Stopping main PD patch..."
+	kill `cat /var/run/pd_main_patch.pid`
         ;;
 
   start)
-        echo "Starting box_display... "
-	cd /home/pi/PiOSCBox/bin
-        /home/pi/PiOSCBox/bin/display &
-	echo $! > /var/run/box_display.pid 
-	sleep 1
+        echo "Starting main PD patch... "
+	cd /home/pi/PiOSCBox/lib/pd
+        pd -nogui /home/pi/PiOSCBox/lib/pd/main.pd 2>&1 >> /dev/null &
+	echo $! > /var/run/pd_main_patch.pid 
 	;;
 
   *)

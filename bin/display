@@ -52,6 +52,7 @@ values = {
 	"/enc/6/value": 0,
 	"/enc/6/label": "ctl6",
 	"/patch_name": "default",
+	"/global/dispval": 0,
 	#"enc6": {"value": 0,"name": "ctrl 6"},
 }
 
@@ -86,6 +87,8 @@ server.add_method( "/enc/5/label", "s", update_display)
 server.add_method( "/enc/6/value", "i", update_display)
 server.add_method( "/enc/6/label", "s", update_display)
 
+server.add_method( "/global/dispval", "i", update_display)
+
 while True:
 
 	global_count += 1
@@ -99,7 +102,7 @@ while True:
 		glcd.draw_rectangle(0, 0, 128, 64)
 
 		# row 1 lables
-		glcd.draw_string(str(values["/enc/1/label"]), fixed, 5, 3,spacing=0)
+		glcd.draw_string(str("PATCH"), fixed, 5, 3,spacing=0)
 		glcd.draw_string(str(values["/enc/2/label"]), fixed, 55, 3,spacing=0)
 		glcd.draw_string(str(values["/enc/3/label"]), fixed, 95, 3,spacing=0)
 
@@ -119,7 +122,8 @@ while True:
 		glcd.draw_string(str(values["/enc/6/value"]), neato, 95, 38,spacing=0)
 
 		# general info
-		glcd.draw_string("" + ip_addr + ":" + values["/patch_name"], fixed, 10, 50,spacing=0)
+		glcd.draw_string(ip_addr + "::->" + str(values["/enc/1/label"]), fixed, 7, 55,spacing=0)
+		glcd.draw_string("-->" + str(values["/global/dispval"]), fixed, 90, 55,spacing=0)
 
 		glcd.flip()
 		#disp.display()

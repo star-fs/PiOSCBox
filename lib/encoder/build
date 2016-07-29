@@ -1,1 +1,0 @@
-gcc -o encoderInterface encoderInterface.c rotaryencoder.c rotaryencoder.h -llo -lwiringPi

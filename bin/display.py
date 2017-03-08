@@ -29,6 +29,11 @@ ip_addrs  = ifaddresses(ifaceName).setdefault(AF_INET, [{'addr':'no ip'}] )
 
 ip_addr = ip_addrs[0]['addr']
 
+if len(ip_addr) == 0:
+	ip_addrs  = ifaddresses('eth0').setdefault(AF_INET, [{'addr':'no ip'}] )
+	ip_addr = ip_addrs[0]['addr']
+	ip_addr = ip_addrs[0]['addr']
+
 server = liblo.Server(9001)
 
 RST=0

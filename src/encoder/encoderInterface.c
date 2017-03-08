@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     int pin_d = 4;
 
     int pin_e = 25;
-    int pin_f = 0;
+    int pin_f = 7;
 
     int pin_g = 23;
     int pin_h = 24;

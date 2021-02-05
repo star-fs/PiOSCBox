@@ -17,10 +17,10 @@ Copy the scripts located at /home/pi/PiOSCBox/etc/init.d/ to the system init dir
 
 Make links to the default runlevel:
 
-''ln -s /etc/init.d/box_display /etc/rc3.d/S04box_display
+ln -s /etc/init.d/box_display /etc/rc3.d/S04box_display
 
-''ln -s /etc/init.d/encoders /etc/rc3.d/S03encoders
+ln -s /etc/init.d/encoders /etc/rc3.d/S03encoders
 
-''ln -s /etc/init.d/pd-main-patch /etc/rc3.d/S05pd-main-patch
+ln -s /etc/init.d/pd-main-patch /etc/rc3.d/S05pd-main-patch
 
 
